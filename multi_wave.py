@@ -5,7 +5,7 @@ import csv
 import os
 
 soundCard = "A0"
-chunk_size = 512  # Number of samples per chunk
+chunk_size = 1024  # Number of samples per chunk
 sampling_rate = 2000  # Sampling rate in Hz
 beta_freq_range = (12, 30)  # Beta frequency range in Hz
 alpha_freq_range = (8, 12)  # Alpha frequency range in Hz
@@ -36,7 +36,7 @@ def loop(csv_writer):
         if alphaData:
             print(f"Received data: {alphaData}")  # Print received data for debugging
             data_chunk.append(int(alphaData))
-    print(f"Data read: {len(data_chunk)} samples.")
+    #print(f"Data read: {len(data_chunk)} samples.")
 
     if len(data_chunk) == chunk_size:
         # Perform FFT
@@ -56,7 +56,7 @@ def loop(csv_writer):
     else:
         print("Insufficient data samples read, skipping this chunk.")
 
-    time.sleep(0.06)  # Wait for 80 milliseconds before the next read
+    time.sleep(0.03)  
 
 def calculate_average_amplitude(fft_result, fft_freqs, freq_range):
     # Find indices corresponding to the specified frequency range
