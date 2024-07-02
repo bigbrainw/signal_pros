@@ -1,7 +1,8 @@
 # Alpha, Beta, and Theta Wave Data Logger
 
 ## Overview
-This script reads alpha, beta, and theta wave data from an Arduino, processes it, and logs the results into a CSV file.
+This script reads alpha, beta, and theta wave data from an Arduino, processes it, and logs the results into a CSV file. It performs Fast Fourier Transform (FFT) on the data to extract amplitude information for different frequency ranges, specifically beta (12-30 Hz), alpha (8-12 Hz), and theta (4-8 Hz) waves. This data can be used for further analysis of brainwave patterns.
+
 
 ## Requirements
 - matplotlib==3.8.2
