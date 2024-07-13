@@ -6,11 +6,11 @@ import os
 
 soundCard = "A0"
 chunk_size = 1024  # Number of samples per chunk
-sampling_rate = 2000  # Sampling rate in Hz
+sampling_rate = 512  # Sampling rate in Hz
 beta_freq_range = (12, 30)  # Beta frequency range in Hz
 alpha_freq_range = (8, 12)  # Alpha frequency range in Hz
 theta_freq_range = (4, 8)  # Theta frequency range in Hz
-csv_file_path = 'fp1mastoid_workin630.csv'
+csv_file_path = 'sleeping.csv'
 
 # Initialize serial communication
 ser = serial.Serial('/dev/cu.usbserial-10', 9600)  # Change '/dev/cu.usbserial-110' to the appropriate port on your system
