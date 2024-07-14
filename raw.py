@@ -11,7 +11,7 @@ BAUD_RATE = 9600
 ser = serial.Serial(SERIAL_PORT, BAUD_RATE)
 
 # File to save raw data
-output_file = 'raw_fp1_eli_1.csv'
+output_file = 'raw_uncle_5.csv'
 
 # Open the CSV file for writing
 with open(output_file, mode='w', newline='') as file:

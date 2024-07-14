@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from scipy.fft import fft
 
 # Load the EEG data from CSV
-input_file = 'raw_fp1_eli_1.csv'
+input_file = 'raw_uncle_5.csv'
 data = pd.read_csv(input_file)
 
 # Convert EEG values to float
