@@ -1,24 +1,48 @@
-import csv
+#calculate result
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.fft import fft
 
-def calculate_average(csv_file_path):
-    total = 0
-    count = 0
+# Load the EEG data from CSV
+input_file = 'raw_fp1_eli_1.csv'
+data = pd.read_csv(input_file)
 
-    with open(csv_file_path, mode='r') as file:
-        csv_reader = csv.reader(file)
-        next(csv_reader)  # Skip the header row if there is one
+# Convert EEG values to float
+data['EEG Value'] = data['EEG Value'].astype(float)
 
-        for row in csv_reader:
-            total += float(row[1])  # Convert the value to float and add to the total
-            count += 1
+# Perform FFT
+eeg_values = data['EEG Value'].values
+n = len(eeg_values)
+fs = 250  # Sampling rate (adjust if necessary)
 
-    if count == 0:
-        raise ValueError("The CSV file is empty or does not have any rows with data.")
-    
-    average = total / count
-    return average
+# Calculate FFT
+frequencies = np.fft.fftfreq(n, d=1/fs)
+fft_values = fft(eeg_values)
 
-# Example usage
-csv_file_path = 'alpha2.csv'
-average_value = calculate_average(csv_file_path)
-print(f"The average of the values in the second column is {average_value:.2f}")
+# Calculate amplitudes
+amplitudes = np.abs(fft_values)[:n // 2]
+
+# Filter frequencies
+frequencies = frequencies[:n // 2]
+
+# Calculate power in different bands
+delta_power = np.mean(amplitudes[(frequencies >= 0.5) & (frequencies < 4)])
+theta_power = np.mean(amplitudes[(frequencies >= 4) & (frequencies < 8)])
+alpha_power = np.mean(amplitudes[(frequencies >= 8) & (frequencies < 13)])
+beta_power = np.mean(amplitudes[(frequencies >= 13) & (frequencies < 30)])
+
+print(f"Delta Power: {delta_power:.2f}")
+print(f"Theta Power: {theta_power:.2f}")
+print(f"Alpha Power: {alpha_power:.2f}")
+print(f"Beta Power: {beta_power:.2f}")
+
+# Plot the amplitude spectrum
+plt.figure(figsize=(12, 6))
+plt.plot(frequencies, amplitudes, color='blue')
+plt.title('EEG Amplitude Spectrum')
+plt.xlabel('Frequency (Hz)')
+plt.ylabel('Amplitude')
+plt.xlim(0, 30)  # Focus on relevant frequencies
+plt.grid()
+plt.show()

@@ -43,7 +43,7 @@ def update(frame):
     ax.set_xlim(x_data_plot[0], x_data_plot[-1])
     return line,
 
-# Create the animation
-ani = animation.FuncAnimation(fig, update, init_func=init, blit=True, interval=50)
+# Create the animation with 4 ms interval for 250 Hz sampling rate
+ani = animation.FuncAnimation(fig, update, init_func=init, blit=True, interval=4)
 
 plt.show()
