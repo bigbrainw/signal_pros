@@ -11,7 +11,7 @@ BAUD_RATE = 9600
 ser = serial.Serial(SERIAL_PORT, BAUD_RATE)
 
 # File to save raw data
-output_file = 'raw_Gma_5.csv'
+output_file = 'raw_eli_sleep_3.csv'
 
 # Open the CSV file for writing
 with open(output_file, mode='w', newline='') as file:
@@ -29,6 +29,7 @@ with open(output_file, mode='w', newline='') as file:
             elapsed_time = current_time - start_time
             if elapsed_time > duration:
                 break
+
 
             data = ser.readline().decode('utf-8').strip()
             timestamp = time.time()
